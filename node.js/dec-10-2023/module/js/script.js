@@ -1,0 +1,2 @@
+import {firstName, lastName, skills} from "./extra.js";
+console.log(firstName() + " " + lastName() + " is a web developer." + " He knows " + skills.html + " html, " + skills.css + " css, " + skills.js + " js, and " + skills.php + " php." );

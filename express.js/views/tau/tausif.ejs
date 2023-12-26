@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="taufrm" method="post">
+        <input type="text" placeholder="Student Name" name="sname">
+        <input type="submit" value="Add Student">
+    </form>
+    <% if(names.length > 0){ %>
+        <ul>
+            <% for(let i = 0; i < names.length; i++){ %>
+                <li><%= names[i] %></li>
+            <% } %>
+        </ul>
+    <% }else{ %>
+        No Student Found
+    <% } %>
+    <form action="taudel" method="post">
+        <!-- delete method -->
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="submit" value="Delete All Data">
+    </form>
+</body>
+</html>
