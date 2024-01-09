@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Hello File!</h2>
+                <form action="/file/upload" method="post" enctype="multipart/form-data">
+                    <div class="mb-3 form-floating ">
+                        <input type="file" name="myfile" class="form-control ">
+                        <label for=""  class="form-label ">Upload File</label>
+                    </div>
+                    <!-- check errors -->
+                    <% if(errors){ %>
+                        <p class="text-danger"><%= errors %></p>
+                    <% } %>
+                    <input type="submit" value="Upload File" class="btn btn-sm btn-primary">
+                </form>
+                <!-- show message -->
+                <% if(message){ %>
+                    <p class="text-success"><%= message %></p>
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

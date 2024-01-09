@@ -1,20 +1,25 @@
 const express = require('express');
 const app = express();
 const port = 4000;
-
-// allow delete method
 const methodOverride = require('method-override');
+const { check, validationResult } = require('express-validator');
+
 app.use(methodOverride('_method'));
+
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true  }));
+
+app.use(express.static('public'));
+
 
 const router = require('./routes/router');
 const tausiRouter = require('./routes/tausifRouter');
-// allow post method
-const bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({ extended: false }));
-
+const fileRouter = require('./routes/fileRouter');
 
 app.use('/api', router);
 app.use('/tausif', tausiRouter);
+app.use('/file', fileRouter);
+
 
 // implement ejs
 app.set('view engine', 'ejs');
@@ -91,4 +96,8 @@ app.get('/akashi', (req, res) => {
 
 app.get('/akashii', (req, res) => {
     res.render('home', { });
+});
+
+app.delete('/ppi', (req, res) => {
+    res.send('Hello Api!');
 });

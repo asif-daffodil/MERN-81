@@ -4,25 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <form action="taufrm" method="post">
-        <input type="text" placeholder="Student Name" name="sname">
-        <input type="submit" value="Add Student">
-    </form>
-    <% if(names.length > 0){ %>
-        <ul>
-            <% for(let i = 0; i < names.length; i++){ %>
-                <li><%= names[i] %></li>
-            <% } %>
-        </ul>
-    <% }else{ %>
-        No Student Found
-    <% } %>
-    <form action="taudel" method="post">
-        <!-- delete method -->
-        <input type="hidden" name="_method" value="DELETE">
-        <input type="submit" value="Delete All Data">
-    </form>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Add new Student</h2>
+                <form action="taufrm" method="POST">
+                    <div class="mb-3 form-floating ">
+                        <input type="text" placeholder="Student Name" name="sname" class="form-control ">
+                        <label for=""  class="form-label ">Student Name</label>
+                        <!-- check error -->
+                    </div>
+                    <% if(errors && errors.sname){ %>
+                        <p class="text-danger"><%= errors.sname.msg %></p>
+                    <% } %>
+                    <div class="mb-3 form-floating">
+                        <input type="text" placeholder="Student Age" name="sage" class="form-control">
+                        <label for=""  class="form-label">Student Age</label>
+                    </div>
+                    <% if(errors && errors.sage){ %>
+                        <p class="text-danger"><%= errors.sage.msg %></p>
+                    <% } %>
+                    <input type="submit" value="Add Student" class="btn btn-sm btn-primary">
+                </form>
+            </div>
+            <div class="col-md-6 d-flex align-items-center ">
+                <form action="/tausif/taudel/1?_method=delete" method="POST" onsubmit="return confirm('Do you really want to delete the students?')">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="submit" value="Delete All Data">
+                </form>
+            </div>
+        </div>
+    </div>
+    
 </body>
 </html>
