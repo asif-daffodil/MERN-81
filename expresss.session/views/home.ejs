@@ -1,0 +1,13 @@
+<%- include('header') %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Hello <%= fname %> <%= lname %></h2>
+      <form action="/logout" method="post">
+        <input type="submit" value="Log out" class="btn btn-primary" />
+      </form>
+    </div>
+  </div>
+</div>
+<%- include('footer') %>
+<!-- logout button -->

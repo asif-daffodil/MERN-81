@@ -1,0 +1,21 @@
+<%- include('header') %>
+    <div class="container">
+        <div class="row min-vh-100 d-flex ">
+            <div class="col-md-4 m-auto border rounded shadow p-4">
+                <h2 class="mb-3">Login Form</h2>
+                <form action="" method="post">
+                    <div class="mb-3">
+                        <input type="text" placeholder="User Name" name="uname" class="form-control ">
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" placeholder="Password" name="pass" class="form-control ">
+                    </div>
+                    <input type="submit" value="Login" class="btn btn-primary">
+                </form>
+                <% if (errMsg) { %>
+                    <div class="alert alert-danger mt-3"><%= errMsg %></div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+<%- include('footer') %>
