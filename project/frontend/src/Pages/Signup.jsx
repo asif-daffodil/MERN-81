@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const success = () => toast.success('Account created successfully', {
     position: "top-right",
@@ -24,6 +25,7 @@ const error = (msg) => toast.error(msg, {
 
 
 const Signup = () => {
+    const navigate = useNavigate();
     const {register, handleSubmit, reset, formState: {errors}} = useForm({mode: 'onChange'});
 
     const onSubmit = async (data) => {
@@ -142,10 +144,11 @@ const Signup = () => {
                 >
                     Sign Up
                 </button>
-                <p className="mt-4 text-gray-500 text-sm">
+                <p className="mt-4 mb-4 text-gray-500 text-sm">
                     By clicking Sign Up, you agree to our Terms, Data Policy and Cookie Policy. You may receive SMS notifications from us and can opt out at any time.
                 </p>
             </form>
+            <button className="bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 w-96 " onClick={() => navigate('/login')}>Login</button>
         </div>
     );
 };
