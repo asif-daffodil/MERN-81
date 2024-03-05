@@ -1,12 +1,15 @@
 import { faFacebookF } from "@fortawesome/free-brands-svg-icons";
-import { faBell, faLeftLong, faMagnifyingGlass, faRightToBracket, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faBell, faImage, faKey, faLeftLong, faMagnifyingGlass, faRightToBracket, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Cookies from "js-cookie";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
     const [searchFocus, setSearchFocus] = useState("");
     const [searchLeftArrow, setSearchLeftArrow] = useState("hidden");
+    const [dbTop, setDbTop] = useState("mt-16 invisible");
+
     const handleSearchFocus = () => {
         setSearchFocus("hidden");
         setSearchLeftArrow("")
@@ -18,6 +21,15 @@ const Header = () => {
     };
 
     const navigate = useNavigate();
+
+    const handleDbTop = () => {
+        dbTop === "mt-0 visible" ? setDbTop("mt-16 invisible") : setDbTop("mt-0 visible");
+    }
+
+    const logout = () => {
+        Cookies.remove('fbuserinfo');
+        navigate('/login');
+    }
 
   return (
     <div className="bg-black">
@@ -36,20 +48,44 @@ const Header = () => {
                 </button>
             </div>
         </form>
-        <div className="w-max inline-block ml-auto">
+        <div className="w-max inline-block ml-auto relative">
           <button className="text-white border rounded-full w-9 h-9 mr-2 bg-slate-700">
             <FontAwesomeIcon icon={faBell} />
           </button>
           <button
             to="/"
             className="text-white border rounded-full w-9 h-9 bg-slate-700"
+            onClick={handleDbTop}
+            onBlur={handleDbTop}
           >
             <FontAwesomeIcon icon={faUser} />
           </button>
-
+          <div className={`w-56 absolute top-[calc(100%+30px)] right-0 bg-white transition-all ${dbTop}`}>
+            <ul>
+              <li className="px-3 py-2 cursor-pointer border-b-2">
+                <FontAwesomeIcon icon={faUser} className="mr-2" />
+                Update Profile
+              </li>
+              <li className="px-3 py-2 cursor-pointer border-b-2">
+                <FontAwesomeIcon icon={faKey} className="mr-2" />
+                Change Password
+              </li>
+              <li className="px-3 py-2 cursor-pointer border-b-2">
+                <FontAwesomeIcon icon={faImage} className="mr-2" />
+                Change Profile Image
+              </li>
+              <li className="px-3 py-2 cursor-pointer" onClick={logout}>
+                <FontAwesomeIcon icon={faRightToBracket} className="mr-2" />
+                Logout
+              </li>
+            </ul>
+          </div>
+          {/* {
+          !Cookies.get('fbuserinfo') &&
           <button className="text-white bg-blue-600 rounded-full w-20 h-9 ml-2" onClick={() =>  navigate("/signup")}>
             <FontAwesomeIcon icon={faRightToBracket} />
           </button>
+          } */}
         </div>
       </div>
     </div>

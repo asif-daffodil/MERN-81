@@ -1,23 +1,55 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
+import Cookies from "js-cookie";
+import { useEffect } from "react";
+
+const success = (msg) => toast.success(msg, {
+    position: "top-right",
+    duration: 5000,
+    style: {
+        backgroundColor: '#00f',
+        color: '#fff',
+        fontSize: '1.5rem'
+    }
+});
+
+const error = (msg) => toast.error(msg, {
+    position: "top-right",
+    duration: 5000,
+    style: {
+        backgroundColor: '#f00',
+        color: '#fff',
+        fontSize: '1.5rem'
+    }
+});
 
 
 const Login = () => {
     const {register, handleSubmit, formState: {errors}} = useForm();
     const navigate = useNavigate();
 
+    useEffect(() => {
+        Cookies.get('fbuserinfo') && navigate('/');
+    })
+
     const onSubmit = async (data) => {
         try {
             const response  = await axios.post("http://localhost:4000/api/login", data);
-            console.log(response.data);
+            if(response.data.message === "Login successful"){
+                success(response.data.message);
+                Cookies.set('fbuserinfo', JSON.stringify(response.data.data), {expires: 1});
+                setTimeout(() => navigate('/'), 3000);
+            }
         } catch (err) {
-            console.log(err);
+            error(err.response.data);
         }
     }
 
     return (
         <div className="flex justify-center items-center h-screen bg-gray-100">
+            <Toaster />
             <div className="bg-white p-8 rounded-lg shadow-lg md:w-2/6">
                 <h1 className="text-3xl font-bold mb-4">Facebook</h1>
                 <p className="text-gray-600 mb-8">

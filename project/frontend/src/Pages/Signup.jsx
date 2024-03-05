@@ -1,4 +1,6 @@
 import axios from "axios";
+import Cookies from "js-cookie";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -27,6 +29,10 @@ const error = (msg) => toast.error(msg, {
 const Signup = () => {
     const navigate = useNavigate();
     const {register, handleSubmit, reset, formState: {errors}} = useForm({mode: 'onChange'});
+
+    useEffect(() => {
+        Cookies.get('fbuserinfo') && navigate('/');
+    })
 
     const onSubmit = async (data) => {
         try {
