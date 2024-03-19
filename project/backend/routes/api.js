@@ -101,4 +101,32 @@ Router.post("/login", loginFormValidation, async (req, res) => {
     }
 });
 
+// update user
+Router.put("/update/:id", async (req, res) => {
+    try {
+        let id = req.params.id;
+        let user = await Register.findOne({ _id: id });
+        if (!user) {
+            return res.status(400).send("User not found");
+        }
+        let firstName = req.body.firstName;
+        let lastName = req.body.lastName;
+        let email = req.body.email;
+        let mobile = req.body.mobile;
+
+        user.firstName = firstName;
+        user.lastName = lastName;
+        user.email = email;
+        user.mobile = mobile;
+
+        const updatedUser = await user.save();
+        const success = {
+            data : updatedUser,
+            message : "User updated"
+        }
+        res.status(200).send(success);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
 module.exports = Router;
