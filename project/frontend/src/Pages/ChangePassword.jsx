@@ -1,7 +1,10 @@
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
+import Cookies from "js-cookie";
 
 const ChangePassword = () => {
     const navigate = useNavigate();
@@ -9,14 +12,52 @@ const ChangePassword = () => {
         navigate("/");
     };
 
+    const success = (msg) => toast.success(msg, {
+        position: "top-right",
+        duration: 5000,
+        style: {
+            backgroundColor: '#00f',
+            color: '#fff',
+            fontSize: '1.5rem'
+        }
+      });
+
+    const error = (msg) => toast.error(msg, {
+        position: "top-right",
+        duration: 5000,
+        style: {
+            backgroundColor: '#f00',
+            color: '#fff',
+            fontSize: '1.5rem'
+        }
+      });  
+
     const { register, handleSubmit, formState: {errors}, getValues } = useForm({ mode: "onChange" });
-    const onSubmit = (data) => {
-        console.log(data);
+    const onSubmit = async (data) => {
+        // console.log(data);
+        // get _id from fbuserinfo cookie
+        const fbUserInfo = JSON.parse(Cookies.get("fbuserinfo"));
+        const _id = fbUserInfo._id;
+        // send data to server
+        try {
+            const response = await axios.put(`http://localhost:4000/api/change-password/${_id}`, data);
+            if (response.status === 200) {
+                // show success message
+                success(response.data.message);
+
+                // navigate to home page
+                setTimeout(() => navigate("/"), 3000);
+            }
+        }catch (err) {
+            // show error message
+            error(err.response.data);
+        }
     }
 
     return (
         <div className="w-full h-screen grid place-items-center">
             {/* password Change from */}
+            <Toaster />
             <div className="w-80 border rounded shadow p-4 relative">
                 <button onClick={goToHome}>
                     <FontAwesomeIcon icon={faTimes} className="absolute top-2 right-2 text-gray-500" />

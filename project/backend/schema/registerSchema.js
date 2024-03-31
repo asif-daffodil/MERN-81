@@ -24,6 +24,10 @@ const registerSchema = new Schema({
         nullable: true,
         unique: true,
     },
+    image: {
+        type: String,
+        nullable: true,
+    },
     isActive: {
         type: Boolean,
         default: true

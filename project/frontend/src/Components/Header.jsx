@@ -99,7 +99,7 @@ const Header = () => {
                 </Link>
               </li>
               <li>
-                <Link className="block px-3 py-2 cursor-pointer border-b-2">
+                <Link to='/profileImage' className="block px-3 py-2 cursor-pointer border-b-2">
                   <FontAwesomeIcon icon={faImage} className="mr-2" />
                   Change Profile Image
                 </Link>

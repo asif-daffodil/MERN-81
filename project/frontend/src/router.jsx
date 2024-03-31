@@ -4,6 +4,7 @@ import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import UpdateProfile from "./Pages/UpdateProfile";
 import ChangePassword from "./Pages/ChangePassword";
+import ProfileImage from "./Pages/ProfileImage";
 
 const router = createBrowserRouter([
     {
@@ -26,6 +27,9 @@ const router = createBrowserRouter([
     },{
       path: "/changePassword",
       element: <ChangePassword />,
+    },{
+      path: "/profileImage",
+      element: <ProfileImage />,
     }
   ]);
 

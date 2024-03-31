@@ -21,7 +21,7 @@ const UpdateProfile = () => {
         color: '#fff',
         fontSize: '1.5rem'
     }
-});
+  });
 
 const navigate = useNavigate();
 

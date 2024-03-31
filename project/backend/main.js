@@ -1,12 +1,11 @@
 const express = require('express');
 const cors = require('cors');
-const multer = require('multer');
-const upload = multer({ dest: 'uploads/' });
 const app = express();
 app.use(cors());
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use('/uploads', express.static('uploads'));
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/taga', { useNewUrlParser: true, useUnifiedTopology: true });
 
