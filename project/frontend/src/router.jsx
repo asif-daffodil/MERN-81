@@ -5,13 +5,14 @@ import Signup from "./Pages/Signup";
 import UpdateProfile from "./Pages/UpdateProfile";
 import ChangePassword from "./Pages/ChangePassword";
 import ProfileImage from "./Pages/ProfileImage";
+import Home from "./Pages/Home";
 
 const router = createBrowserRouter([
     {
       path: "/",
       element: <Layout />,
         children: [
-            { path: "/", element: <h1>Home</h1> },
+            { path: "/", element: <Home /> },
             { path: "/contact", element: <h1>Contact</h1> },
         ],
     },

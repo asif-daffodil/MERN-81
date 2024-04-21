@@ -36,6 +36,10 @@ const Header = () => {
       : setDbTop("mt-0 visible");
   };
 
+  const handleDbTopBlur = () => {
+    setDbTop("mt-16 invisible")
+  };
+
   const logout = () => {
     Cookies.remove("fbuserinfo");
     navigate("/login");
@@ -74,7 +78,7 @@ const Header = () => {
           <button
             className="text-white border rounded-full w-9 h-9 bg-slate-700"
             onClick={handleDbTop}
-            onBlur={handleDbTop}
+            onBlur={handleDbTopBlur}
           >
             <FontAwesomeIcon icon={faUser} />
           </button>

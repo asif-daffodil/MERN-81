@@ -13,6 +13,9 @@ const port = 4000;
 const api = require('./routes/api');
 app.use('/api', api);
 
+const post = require('./routes/post');
+app.use('/post', post);
+
 app.get('/', (req, res) =>
     res.send('Hello World!')
     );
